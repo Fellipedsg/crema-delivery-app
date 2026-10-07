@@ -8,7 +8,21 @@
     "scheme": "crema",
     "userInterfaceStyle": "dark",
     "backgroundColor": "#0C0906",
-    "ios": { "supportsTablet": false, "bundleIdentifier": "com.crema.delivery" },
-    "plugins": ["expo-router", "expo-font"]
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.crema.delivery"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/icon.png"
+    },
+    "experiments": {
+      "baseUrl": "/crema-delivery-app"
+    }
   }
 }
