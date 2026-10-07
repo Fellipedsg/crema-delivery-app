@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Screen, Emblem, T, Input, Btn } from '../src/components/ui';
 import { useStore } from '../src/store';
 import { c, f } from '../src/theme';
@@ -15,7 +16,11 @@ export const ageOf = (v: string) => {
 };
 export default function Age() {
   const r = useRouter(); const { birth, setBirth } = useStore();
-  const go = () => (ageOf(birth) >= 18 ? r.replace('/login') : r.replace('/blocked'));
+  const go = () => {
+    if (ageOf(birth) < 18) return r.replace('/blocked');
+    AsyncStorage.setItem('crema.ageConfirmedAt', new Date().toISOString()).catch(() => {});
+    r.replace('/login');
+  };
   return (
     <Screen scroll style={{ alignItems: 'center', paddingTop: 40 }}>
       <View><Emblem />

@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { Screen, Header, T, Input, Btn, Check, Row } from '../src/components/ui';
 import { useStore } from '../src/store';
 import { c } from '../src/theme';
-import { ageOf } from './age';
+import { ageOf, maskDate } from './age';
 
 const cpfOk = (v: string) => {
   const d = v.replace(/\D/g, ''); if (d.length !== 11 || /^(\d)\1+$/.test(d)) return false;
@@ -13,7 +13,7 @@ const cpfOk = (v: string) => {
 };
 const mask = (v: string, p: string) => { let i = 0; const d = v.replace(/\D/g, ''); let o = ''; for (const ch of p) { if (i >= d.length) break; o += ch === '#' ? d[i++] : ch; } return o; };
 export default function Signup() {
-  const r = useRouter(); const { birth } = useStore();
+  const r = useRouter(); const { birth, setBirth } = useStore();
   const [f, set] = useState({ name: 'Rafael Costa', cpf: '', phone: '', email: '', pass: '' }); const [ok, setOk] = useState(false);
   const errs = [!f.name.trim() && 'Informe o nome', !cpfOk(f.cpf) && 'CPF inválido', ageOf(birth.replace(/ /g, '')) < 18 && 'É preciso ter 18 anos ou mais', !/\S+@\S+\.\S+/.test(f.email) && 'E-mail inválido', f.pass.length < 8 && 'Senha com 8+ caracteres', !ok && 'Aceite os termos'].filter(Boolean);
   return (
@@ -24,7 +24,7 @@ export default function Signup() {
       <View style={{ height: 8 }} />
       <Input label="Nome completo" icon="user" value={f.name} onChangeText={(v) => set({ ...f, name: v })} />
       <Input label="CPF" icon="id-card" placeholder="000.000.000-00" keyboardType="number-pad" value={f.cpf} onChangeText={(v) => set({ ...f, cpf: mask(v, '###.###.###-##') })} />
-      <Input label="Data de nascimento" icon="calendar" value={birth} editable={false} />
+      <Input label="Data de nascimento" icon="calendar" placeholder="DD / MM / AAAA" keyboardType="number-pad" value={birth} onChangeText={(v) => setBirth(maskDate(v))} />
       <Input label="Celular/WhatsApp" icon="phone" placeholder="(79) 9 0000-0000" keyboardType="number-pad" value={f.phone} onChangeText={(v) => set({ ...f, phone: mask(v, '(##) # ####-####') })} />
       <Input label="E-mail" icon="mail" autoCapitalize="none" keyboardType="email-address" value={f.email} onChangeText={(v) => set({ ...f, email: v })} />
       <Input label="Senha" icon="lock" secureTextEntry placeholder="Mínimo de 8 caracteres" value={f.pass} onChangeText={(v) => set({ ...f, pass: v })} />

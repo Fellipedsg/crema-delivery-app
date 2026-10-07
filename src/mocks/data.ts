@@ -39,10 +39,10 @@ export const categories = [
   { id: 'energeticos', name: 'Energéticos', icon: 'zap' }, { id: 'acessorios', name: 'Acessórios', icon: 'package' },
 ];
 export const orders = [
-  { id: '#CR-4821', status: 'a_caminho', date: 'Hoje, 19:52', items: 4, total: 17050, names: 'Malbec, Essência, Carvão, Gelo' },
-  { id: '#CR-4790', status: 'entregue', date: '02 out', items: 3, total: 12480, names: 'Cabernet, Gelo, Carvão' },
-  { id: '#CR-4733', status: 'entregue', date: '24 set', items: 2, total: 6890, names: 'Merlot, Essência' },
-  { id: '#CR-4701', status: 'cancelado', date: '15 set', items: 1, total: 8990, names: 'Malbec Reserva' },
+  { id: '#CR-4821', status: 'a_caminho', date: 'Hoje, 19:52', items: 4, total: 17050, names: 'Malbec, Essência, Carvão, Gelo', ids: ['malbec', 'essencia', 'carvao', 'gelo'] },
+  { id: '#CR-4790', status: 'entregue', date: '02 out', items: 3, total: 12480, names: 'Cabernet, Gelo, Carvão', ids: ['cabernet', 'gelo', 'carvao'] },
+  { id: '#CR-4733', status: 'entregue', date: '24 set', items: 2, total: 6890, names: 'Merlot, Essência', ids: ['merlot', 'essencia'] },
+  { id: '#CR-4701', status: 'cancelado', date: '15 set', items: 1, total: 8990, names: 'Malbec Reserva', ids: ['malbec'] },
 ];
 export const notifs = [
   { id: 1, g: 'Hoje', t: 'pedidos', icon: 'bike', title: 'Pedido a caminho', body: 'Carlos saiu com seu pedido #CR-4821. Chega em ~12 min.', when: 'agora', unread: true, to: '/tracking' },

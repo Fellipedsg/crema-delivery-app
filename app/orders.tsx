@@ -28,7 +28,7 @@ export default function Orders() {
           {past.map((o) => (
             <Card key={o.id} style={{ marginBottom: 10 }}>
               <Row style={{ gap: 12 }}><Placeholder w={48} h={48} r={10} /><View style={{ flex: 1 }}><Row style={{ justifyContent: 'space-between' }}><T v="semi">{o.id}</T><Badge label={o.status === 'entregue' ? 'Entregue' : 'Cancelado'} kind={kind(o.status)} /></Row><T v="label" numberOfLines={1}>{o.names}</T><T v="label">{o.date} · {brl(o.total)}</T></View></Row>
-              <Row style={{ gap: 6, marginTop: 10 }} ><Ic n="rotate-ccw" s={16} color={c.gold} /><T v="semi" color={c.gold} style={{ fontSize: 13 }} onPress={() => { add(quickItem('malbec')); r.push('/bag'); }}>Pedir de novo</T></Row>
+              <Row style={{ gap: 6, marginTop: 10 }} ><Ic n="rotate-ccw" s={16} color={c.gold} /><T v="semi" color={c.gold} style={{ fontSize: 13 }} onPress={() => { o.ids.forEach((id) => add(id === 'essencia' ? { ...quickItem(id), flavor: 'Menta', size: '50g', label: '50g · Sabor: Menta' } : quickItem(id))); r.push('/bag'); }}>Pedir de novo</T></Row>
             </Card>))}</>}
       </Screen>
       <TabBar />

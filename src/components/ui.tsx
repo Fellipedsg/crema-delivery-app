@@ -62,7 +62,7 @@ export const Header = ({ title, right, close, noBack }: { title?: string; right?
   return (
     <View style={{ height: 44, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
       {noBack ? <View style={{ width: 40 }} /> : <Circle n={close ? 'x' : 'chevron-left'} onPress={() => (r.canGoBack() ? r.back() : r.replace('/home'))} />}
-      <T v="title">{title}</T>
+      <View pointerEvents="none" style={{ position: 'absolute', left: 60, right: 60, alignItems: 'center' }}><T v="title" numberOfLines={1}>{title}</T></View>
       <View style={{ minWidth: 40, alignItems: 'flex-end' }}>{right}</View>
     </View>
   );
