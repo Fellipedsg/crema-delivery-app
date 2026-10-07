@@ -23,6 +23,11 @@ jobs:
       - run: npm run build
         env:
           CI: "1"
+      - run: npm install && npm run build
+        working-directory: admin
+        env:
+          CI: "1"
+      - run: mkdir -p dist/admin && cp -r admin/dist/. dist/admin/
       - run: touch dist/.nojekyll && cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
