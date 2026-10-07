@@ -28,7 +28,7 @@ const seed: DB = {
     o(4829, 'João Pedro', [{ name: 'Essência Premium 50g · Uva', qty: 2, price: 2490 }, { name: 'Carvão de coco 1kg', qty: 1, price: 1990 }], 'confirmado', 6, 'Cartão no app', { notes: 'Interfone 12' }),
     o(4828, 'Camila Souza', [{ name: 'Merlot Suave', qty: 3, price: 3990 }], 'preparando', 14, 'Dinheiro (troco p/ R$ 200)'),
     o(4827, 'Lucas Ferreira', [{ name: 'Carménère Gran Reserva', qty: 1, price: 11990 }, { name: 'Taças acrílicas', qty: 1, price: 990 }], 'a_caminho', 27, 'Pix', { courier: 'Carlos M.' }),
-    o(4821, 'Rafael Costa', [{ name: 'Malbec Reserva', qty: 1, price: 8990 }, { name: 'Essência Premium 50g · Menta', qty: 2, price: 2490 }, { name: 'Carvão de coco 1kg', qty: 1, price: 1990 }, { name: 'Gelo em cubos 5kg', qty: 1, price: 1490 }], 'a_caminho', 33, 'Pix', { courier: 'Carlos M.', discount: 1000 }),
+    o(4821, 'Rafael Costa', [{ name: 'Malbec Reserva', qty: 1, price: 8990 }, { name: 'Essência Premium 50g · Menta', qty: 2, price: 2490 }, { name: 'Carvão de coco 1kg', qty: 1, price: 1990 }, { name: 'Gelo em cubos 5kg', qty: 1, price: 1490 }], 'a_caminho', 33, 'Pix', { courier: 'Carlos M.', discount: 1000, deliveryCode: '4821' }),
     o(4818, 'Ana Beatriz', [{ name: 'Malbec Reserva', qty: 2, price: 8990 }], 'entregue', 120, 'Pix', { courier: 'Diego R.' }),
     o(4815, 'Pedro Henrique', [{ name: 'Essência Premium 250g · Ice Mint', qty: 1, price: 8990 }, { name: 'Carvão de coco 1kg', qty: 2, price: 1990 }], 'entregue', 190, 'Cartão no app', { courier: 'Carlos M.' }),
     o(4811, 'Juliana Lima', [{ name: 'Cabernet Sauvignon', qty: 1, price: 5990 }, { name: 'Merlot Suave', qty: 1, price: 3990 }], 'entregue', 260, 'Cartão na maquininha', { courier: 'Diego R.' }),
@@ -59,7 +59,7 @@ const seed: DB = {
   settings: { open: true, opensAt: '10:00', closesAt: '23:00', minOrder: 3000, fee: 600, radiusKm: 8, eta: '30–45 min' },
 };
 
-const KEY = 'crema-admin-db-v1';
+const KEY = 'crema-admin-db-v2';
 let state: DB = (() => { try { const s = localStorage.getItem(KEY); if (s) return JSON.parse(s) as DB; } catch { /* sem storage */ } return seed; })();
 const subs = new Set<() => void>();
 export const update = (fn: (d: DB) => DB) => {

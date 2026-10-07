@@ -90,7 +90,7 @@ export function Orders() {
     {view === 'quadro' ? <div className="kan">{cols.map(([t, ss]) => { const l = list.filter((o) => ss.includes(o.status)); return (
       <div key={t}><h3>{t} · {l.length}</h3>{l.map((o) => <div key={o.id} className="oc" onClick={() => setSel(o.id)}>
         <div className="row" style={{ justifyContent: 'space-between' }}><b>{o.code}</b><span className="sm muted">{ago(o.createdAt)}</span></div>
-        <div className="sm muted">{o.customer} · {o.items.reduce((a, i) => a + i.qty, 0)} itens</div>
+        <div className="sm muted">{o.customer} · {(n => `${n} ${n === 1 ? 'item' : 'itens'}`)(o.items.reduce((a, i) => a + i.qty, 0))}</div>
         <div className="row" style={{ justifyContent: 'space-between', marginTop: 6 }}><Badge s={o.status} /><b className="gold">{brl(orderTotal(o))}</b></div></div>)}
         {l.length === 0 && <div className="muted sm">Nenhum pedido.</div>}</div>); })}</div>
     : <div className="card"><table><thead><tr><th>Pedido</th><th>Cliente</th><th>Pagamento</th><th>Status</th><th>Quando</th><th style={{ textAlign: 'right' }}>Total</th></tr></thead>
