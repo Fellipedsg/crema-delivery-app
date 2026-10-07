@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Crema",
+    "slug": "crema-delivery-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "crema",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0C0906",
+    "ios": { "supportsTablet": false, "bundleIdentifier": "com.crema.delivery" },
+    "plugins": ["expo-router", "expo-font"]
+  }
+}
