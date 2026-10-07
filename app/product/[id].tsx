@@ -15,8 +15,8 @@ export default function Product() {
   const unit = base + extra; const need = !!p.flavors && !flavor;
   return (
     <View style={{ flex: 1, backgroundColor: c.bg }}>
-      <Screen scroll pad={false} bottom={100} style={{ paddingTop: 0 }}>
-        <View style={{ height: 300, marginTop: -8 }}><Placeholder h={300} r={0} /></View>
+      <Screen scroll flush pad={false} bottom={100}>
+        <View style={{ height: 300 }}><Placeholder h={300} r={0} /></View>
         <View style={{ marginTop: -28, backgroundColor: c.bg, borderTopLeftRadius: 28, borderTopRightRadius: 28, padding: 20 }}>
           <T v="over">{p.niche} · {p.sub === 'Tintos' ? 'Vinho tinto' : p.sub}</T>
           <T v="l" style={{ marginVertical: 6 }}>{p.name}</T>

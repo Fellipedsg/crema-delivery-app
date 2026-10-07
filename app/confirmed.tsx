@@ -1,11 +1,16 @@
 import { View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useEffect, useState } from 'react';
 import { Screen, T, Ic, Card, Row, IconCircle, Notice, Btn } from '../src/components/ui';
 import { useStore, totals, payLabel } from '../src/store';
 import { c, g, brl } from '../src/theme';
 export default function Confirmed() {
-  const r = useRouter(); const { items, coupon, pay } = useStore(); const t = totals(items, coupon); const n = items.length;
+  const r = useRouter(); const { items, coupon, pay, clear } = useStore();
+  // guarda o resumo do pedido e esvazia a sacola (pedido já foi feito)
+  const [snap] = useState(() => ({ t: totals(items, coupon), n: items.length }));
+  const { t, n } = snap;
+  useEffect(() => { clear(); }, []);
   return (
     <Screen scroll style={{ alignItems: 'center', paddingTop: 30 }}>
       <View style={{ width: 160, height: 160, borderRadius: 80, backgroundColor: c.gold + '14', alignItems: 'center', justifyContent: 'center' }}>

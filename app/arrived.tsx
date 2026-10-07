@@ -10,7 +10,7 @@ export default function Arrived() {
       <T v="xl" style={{ marginTop: 20 }}>Seu pedido chegou!</T>
       <T v="mutedb" style={{ textAlign: 'center', marginVertical: 10 }}>O entregador está na sua porta. Confira os itens antes de receber.</T>
       <T v="label" style={{ marginVertical: 8 }}>Informe este código ao entregador</T>
-      <Row style={{ gap: 10, marginBottom: 12 }}>{'4821'.split('').map((d, i) => <View key={i} style={{ width: 64, height: 72, borderRadius: 14, backgroundColor: c.surface2, borderWidth: 1, borderColor: c.gold, alignItems: 'center', justifyContent: 'center' }}><T style={{ fontFamily: f.b, fontSize: 32, color: c.gold }}>{d}</T></View>)}</Row>
+      <Row style={{ gap: 10, marginBottom: 12 }}>{'4821'.split('').map((d, i) => <View key={i} style={{ width: 64, height: 72, borderRadius: 14, backgroundColor: c.surface2, borderWidth: 1, borderColor: c.gold, alignItems: 'center', justifyContent: 'center' }}><T style={{ fontFamily: f.b, fontSize: 32, lineHeight: 40, color: c.gold }}>{d}</T></View>)}</Row>
       <View style={{ alignSelf: 'stretch' }}>
         <Notice danger title="Verificação de idade" text="Apresente um documento oficial com foto. Sem documento, bebidas e produtos de tabaco não podem ser entregues." />
         <Card style={{ marginVertical: 8 }}><Row style={{ justifyContent: 'space-between' }}><T v="semi">4 itens · Pago via Pix</T><T v="semi" color={c.gold} style={{ fontSize: 13 }}>Ver itens</T></Row></Card>

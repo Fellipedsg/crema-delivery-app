@@ -34,14 +34,17 @@ export const T = ({ v = 'body', color, style, ...p }: any) => {
     over: { fontFamily: f.b, fontSize: 11, letterSpacing: 1.1, color: c.gold, textTransform: 'uppercase' },
     semi: { fontFamily: f.s, fontSize: 14, color: c.text }, bold: { fontFamily: f.b, fontSize: 16, color: c.gold },
   };
-  return <Text {...p} style={[base[v], color && { color }, style]} />;
+  const flat: any = StyleSheet.flatten([base[v], color && { color }, style]) ?? {};
+  // fonte grande herdando lineHeight pequeno do 'body' cortava o texto
+  if (flat.fontSize > 18 && flat.lineHeight && flat.lineHeight < flat.fontSize * 1.15) flat.lineHeight = Math.round(flat.fontSize * 1.25);
+  return <Text {...p} style={flat} />;
 };
 
-export const Screen = ({ children, scroll, pad = true, bottom = 0, style }: { children: React.ReactNode; scroll?: boolean; pad?: boolean; bottom?: number; style?: StyleProp<ViewStyle> }) => {
+export const Screen = ({ children, scroll, pad = true, bottom = 0, style, flush }: { children: React.ReactNode; scroll?: boolean; pad?: boolean; bottom?: number; style?: StyleProp<ViewStyle>; flush?: boolean }) => {
   const { top } = useSafeAreaInsets();
   const inner = [{ paddingHorizontal: pad ? 20 : 0, paddingBottom: bottom + 24 }, style];
   return (
-    <View style={{ flex: 1, backgroundColor: c.bg, paddingTop: top + 8 }}>
+    <View style={{ flex: 1, backgroundColor: c.bg, paddingTop: flush ? 0 : top + 8 }}>
       {scroll ? <ScrollView contentContainerStyle={inner} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">{children}</ScrollView>
         : <View style={[{ flex: 1 }, inner]}>{children}</View>}
     </View>

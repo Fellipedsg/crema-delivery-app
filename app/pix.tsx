@@ -9,11 +9,15 @@ import { c, f, brl } from '../src/theme';
 const CODE = '00020126580014br.gov.bcb.pix0136crema-4821-pix5204000053039865802BR5920Crema Tabacaria6304A1B2';
 const Qr = () => {
   const cells = 25; let seed = 4821; const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
-  const finder = (x: number, y: number) => (x < 7 && y < 7) || (x > cells - 8 && y < 7) || (x < 7 && y > cells - 8);
+  // posição local dentro de um finder 7×7 (ou null)
+  const local = (x: number, y: number) => {
+    const o = [[0, 0], [cells - 7, 0], [0, cells - 7]].find(([ox, oy]) => x >= ox - 1 && x <= ox + 7 && y >= oy - 1 && y <= oy + 7);
+    return o ? [x - o[0], y - o[1]] : null;
+  };
   const rects = [];
   for (let y = 0; y < cells; y++) for (let x = 0; x < cells; x++) {
-    const edge = (a: number, b: number) => a === 0 || a === 6 || b === 0 || b === 6 || (a >= 2 && a <= 4 && b >= 2 && b <= 4);
-    const on = finder(x, y) ? edge(x % (cells - 7) % 18 > 6 ? x - (cells - 7) : x, y > cells - 8 ? y - (cells - 7) : y) : rnd() > 0.5;
+    const l = local(x, y); const v = rnd() > 0.5;
+    const on = l ? l[0] >= 0 && l[0] <= 6 && l[1] >= 0 && l[1] <= 6 && (l[0] === 0 || l[0] === 6 || l[1] === 0 || l[1] === 6 || (l[0] >= 2 && l[0] <= 4 && l[1] >= 2 && l[1] <= 4)) : v;
     if (on) rects.push(<Rect key={`${x}-${y}`} x={x} y={y} width={1} height={1} fill="#111" />);
   }
   return <Svg width={190} height={190} viewBox={`0 0 ${cells} ${cells}`}>{rects}</Svg>;
