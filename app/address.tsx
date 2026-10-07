@@ -6,6 +6,8 @@ import { MapMock } from '../src/components/MapMock';
 import { c } from '../src/theme';
 export default function Address() {
   const r = useRouter(); const [lbl, setLbl] = useState('Casa'); const [cep, setCep] = useState(''); const [street, setStreet] = useState('');
+  // mock do raio de entrega: só atendemos CEPs 490xx-xxx (ponytail: trocar por distância real à loja)
+  const done = cep.replace(/\D/g, '').length === 8; const inArea = cep.startsWith('490');
   const onCep = (v: string) => { const d = v.replace(/\D/g, '').slice(0, 8); setCep(d.length > 5 ? d.slice(0, 5) + '-' + d.slice(5) : d); if (d.length === 8) setStreet('Rua das Flores'); };
   return (
     <Screen scroll>
@@ -17,8 +19,8 @@ export default function Address() {
       <Input label="Complemento/referência" placeholder="Apto, bloco, ponto de referência" />
       <T v="label" style={{ marginBottom: 8 }}>Salvar como</T>
       <Row style={{ gap: 8, marginBottom: 20 }}>{[['Casa', 'house'], ['Trabalho', 'briefcase'], ['Outro', 'map-pin']].map(([l, i]) => <Chip key={l} label={l} icon={i} active={lbl === l} onPress={() => setLbl(l)} />)}</Row>
-      <Row style={{ gap: 6, marginBottom: 12 }}><Ic n="check" s={16} color={c.success} /><T v="label" color={c.success}>Endereço dentro da área de entrega</T></Row>
-      <Btn title="Salvar endereço" onPress={() => r.replace('/home')} />
+      {done && <Row style={{ gap: 6, marginBottom: 12 }}><Ic n={inArea ? 'check' : 'x'} s={16} color={inArea ? c.success : c.wineLight} /><T v="label" style={{ flex: 1 }} color={inArea ? c.success : c.wineLight}>{inArea ? 'Endereço dentro da área de entrega' : 'Fora da área de entrega. Tente outro endereço.'}</T></Row>}
+      <Btn title="Salvar endereço" disabled={!done || !inArea} onPress={() => r.replace('/home')} />
     </Screen>
   );
 }
